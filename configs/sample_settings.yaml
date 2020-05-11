@@ -1,0 +1,6 @@
+table_name: "stp-abcdefghijklmn"
+bucket_name: "stp-abcdefghijklmn"
+base_url: "https://sample-cloudfront-url.cloudfront.net/"
+tmpl_path: "templates/stph.html"
+region: "ap-northeast-1"
+port: "8080"

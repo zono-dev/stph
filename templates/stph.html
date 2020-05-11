@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ImageList</title>
+    <style type="text/css">
+[class^="img-flex-"] {
+	margin-bottom: 20px;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+}
+
+.img-flex-0 img { width: 100% }
+.img-flex-2 img { width: 49%; }
+.img-flex-3 img { width: 32%; }
+.img-flex-4 img { width: 24%; }
+    </style>
+
+<script type="text/javascript"> 
+    function check(){
+        if(window.confirm('Are you sure you want to delete image permanently?')){
+            return true;
+        }
+        else{
+            window.alert('The deletion has been cancled.');
+            return false;
+        }
+    }
+</script>
+</head>
+<body>
+
+<h1>Images</h1>
+
+<p>
+{{$fn := .FlexNum}}
+{{range $i, $v := .Items}}
+{{if isDiv $i $fn 0}}
+<div class="img-flex-0">
+{{end}}
+<div>
+    <a href="{{$v.Href}}"><img src="{{$v.ImgSrc}}" alt="{{$v.Alt}}"></a> <br>
+    <textarea readonly wrap="off" cols="50">{{"{{"}}&lt; stp href="{{$v.Href}}" src="{{$v.ImgSrc}}" alt="{{$v.Alt}}" &gt;{{"}}"}}</textarea>
+    <form action="/delete" method="post" onsubmit="return check()">
+        <button type="submit" name="del" value="{{$v.Alt}}">Delete</button>
+    </form>
+</div>
+{{if ne $i 0}}
+{{if isDiv $i $fn 1}}
+</div>
+{{end}}
+{{end}}
+{{end}}
+</p>
+
+
+</body>
+</html>
