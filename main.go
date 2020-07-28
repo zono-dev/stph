@@ -156,7 +156,7 @@ func RegistHandle() {
 
 // main function. Let's get started. :)
 func main() {
-	Conf = ReadConfig("configs/settings.yaml")
+	Conf = ReadConfig(filepath.Join("configs", "settings.yaml"))
 	s3svc = NewS3Sess(Conf["region"])
 	fmt.Println(Conf)
 
