@@ -40,11 +40,10 @@ jobs:
       run: mkdir windows_bin
 
     - name: Build for Windows
-      run: |
-        GOOS=windows GOARCH=amd64 go build -v -o stph.exe .
+      run: GOOS=windows GOARCH=amd64 go build -v -o stph.exe .
     
     - name: Create Artifact
-        zip stph.zip -r stph stph.exe configs/sample_settings.yaml templates/stph.html
+      run: zip stph.zip -r stph stph.exe configs/sample_settings.yaml templates/stph.html
 
     - name: Create Release
       id: create_release
