@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"sort"
 
 	"github.com/zono-dev/stplib"
 )
@@ -91,6 +92,11 @@ func InitPage() ([]stplib.ImgInfo, PageParam, error) {
 		fmt.Printf("[ERROR] Failed to get items with GetItems %#v.\n", err)
 		return []stplib.ImgInfo{}, PageParam{}, err
 	}
+
+	// sort by time of file creation
+	sort.Slice(items, func(i, j int) bool {
+		return items[i].CreatedAt.After(items[j].CreatedAt)
+	})
 
 	pp := PageParam{}
 	pp.Items = CreateImgTag(items, Conf["base_url"])
